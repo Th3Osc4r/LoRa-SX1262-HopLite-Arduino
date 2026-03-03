@@ -72,7 +72,7 @@ These are deliberate exclusions.  Hoplite is a network layer, not an application
 
 **Why no acknowledgments:** The SX1262 is a half-duplex radio — it cannot transmit and receive at the same time.  Every ACK forces a TX→RX→TX state transition during which the node is completely deaf to other traffic.  In a mesh, the problem compounds: an ACK for a multi-hop packet must flood back through every relay, doubling on-air traffic, consuming duty cycle budget, and increasing collision probability.  When an ACK is lost, the sender cannot distinguish "data lost" from "ACK lost" — so it retransmits the data, adding duplicate packets to the channel.  More retransmissions mean more collisions, more lost ACKs, and more retransmissions — a feedback loop that worsens under load.  ACKs are architecturally incompatible with LoRa mesh networking at any meaningful node density or traffic rate.
 
-Hoplite uses a different strategy: redundant transmission for critical events (3 copies per alarm, spaced in time) and acceptance of per-packet loss for routine telemetry.  This approach was validated across 513 alarm events with 99.8% event delivery — without a single acknowledgment packet.
+Hoplite uses a different strategy: redundant transmission for critical events (3 copies per alarm, spaced in time) and acceptance of per-packet loss for routine telemetry.  This approach was validated across 513 alarm events with 99.8% event delivery — without a the loss of a single acknowledgment packet.
 
 ---
 
